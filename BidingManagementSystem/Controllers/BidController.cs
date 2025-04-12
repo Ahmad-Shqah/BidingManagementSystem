@@ -21,7 +21,7 @@ namespace BidingManagementSystem.Controllers
         }
 
         // Create Bid
-        [HttpPost("create tender")]
+        [HttpPost("create Bid")]
         public async Task<IActionResult> CreateBid([FromBody] BidDTO bidDto)
         {
             var user = _userRepo.GetUserById(bidDto.UserId);
@@ -75,7 +75,7 @@ namespace BidingManagementSystem.Controllers
         }
 
         // Upload Bid Document
-        [HttpPost("upload-bid-doc")]
+        [HttpPost("uploadBidDocument")]
         public async Task<IActionResult> UploadBidDocument([FromBody] BidDocumentDTO docDto)
         {
             var bid = await _bidRepo.GetBidForTenderWithIdAsync(docDto.BidId, docDto.BidId);

@@ -18,7 +18,7 @@ namespace BidingManagementSystem.Controllers
         }
 
         // Create a new tender
-        [HttpPost("create Tender")]
+        [HttpPost("/api/Tender/create Tender")]
         public async Task<IActionResult> CreateTender([FromBody] TenderDTO tenderDTO)
         {
             // user authorization 
@@ -48,7 +48,7 @@ namespace BidingManagementSystem.Controllers
         }
 
         // Upload a document for a tender
-        [HttpPost("uploadTenderDocument/{tenderId}")]
+        [HttpPost("/api/Tender/uploadTenderDocument/{tenderId}")]
         public async Task<IActionResult> UploadTenderDocument(TenderDocumentDTO tenderDocDto)
         {
             var tender = await _tenderRepo.GetTenderByIdAsync(tenderDocDto.TenderId);
@@ -72,7 +72,7 @@ namespace BidingManagementSystem.Controllers
         }
 
         // Get a tender by ID
-        [HttpGet("GetTenderById/{id}")]
+        [HttpGet("/api/Tender/GetTenderById/{id}")]
         public async Task<IActionResult> GetTenderById(int id)
         {
             var tender = await _tenderRepo.GetTenderByIdAsync(id);
@@ -85,7 +85,7 @@ namespace BidingManagementSystem.Controllers
         }
 
         // Get all tenders created by the current user
-        [HttpGet("GetAlltenders/{userId}")]
+        [HttpGet("/api/Tender/GetAlltenders/{userId}")]
         public async Task<IActionResult> GetAllTendersByUser(int userId)
         {
             var tenders = await _tenderRepo.GetAllTendersByUserAsync(userId);

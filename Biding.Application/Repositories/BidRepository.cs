@@ -10,6 +10,7 @@ namespace Biding.Application.Repositories
     {
         private readonly SystemDbContext _context;
 
+
         public BidRepository(SystemDbContext context) : base(context)
         {
             _context = context;
@@ -32,6 +33,7 @@ namespace Biding.Application.Repositories
         {
             return await _context.Bids
                 .Where(b => b.TenderId == tenderId)
+                .OrderBy(b => b.ProposedAmount)
                 .ToListAsync();
         }
 
@@ -42,7 +44,6 @@ namespace Biding.Application.Repositories
                 return null;
 
             bid.Score = score;
-            await _context.SaveChangesAsync();
             return bid;
         }
 
