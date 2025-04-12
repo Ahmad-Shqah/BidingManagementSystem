@@ -5,7 +5,7 @@ namespace Biding_management_System.Models
 {
         public enum UserRole    //for Role  Base Access Control :)
     {
-        Admin,
+        User,
         ProcurementOfficer,
         Bidder,
         Evaluator

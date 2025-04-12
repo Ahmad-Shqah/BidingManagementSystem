@@ -46,18 +46,18 @@ namespace BidingManagementSystem.Controllers
             return Ok(createdBid);
         }
 
-        // Get Bid by TenderId and BidId
-        [HttpGet("get Bid wth tender {tenderId}/bid/{bidId}")]
-        public async Task<IActionResult> GetBidForTenderWithId(int tenderId, int bidId)
+        // Get Bid BidId
+        [HttpGet("get Bid wth BidId")]
+        public async Task<IActionResult> GetBidForTenderWithId(int bidId)
         {
-            var bid = await _bidRepo.GetBidForTenderWithIdAsync(tenderId, bidId);
+            var bid = await _bidRepo.GetByIdAsync(bidId);
             if (bid == null)
                 return NotFound("Bid not found.");
             return Ok(bid);
         }
 
         // Get All Bids for Tender
-        [HttpGet("{tenderId}/all-bids")]
+        [HttpGet("get all-bids For tender with TenderId")]
         public async Task<IActionResult> GetAllBidsForTender(int tenderId)
         {
             var bids = await _bidRepo.GetAllBidsForTenderAsync(tenderId);
@@ -66,7 +66,7 @@ namespace BidingManagementSystem.Controllers
 
         // Evaluate Bid
         [HttpPut("evaluate/{bidId}")]
-        public async Task<IActionResult> EvaluateBid(int bidId, [FromBody] decimal score)
+        public async Task<IActionResult> EvaluateBid(int bidId, decimal score)
         {
             var bid = await _bidRepo.EvaluateBidAsync(bidId, score);
             if (bid == null)
@@ -78,7 +78,7 @@ namespace BidingManagementSystem.Controllers
         [HttpPost("uploadBidDocument")]
         public async Task<IActionResult> UploadBidDocument([FromBody] BidDocumentDTO docDto)
         {
-            var bid = await _bidRepo.GetBidForTenderWithIdAsync(docDto.BidId, docDto.BidId);
+            var bid = await _bidRepo.GetBidWithIdAsync(docDto.BidId);
             if (bid == null)
                 return NotFound("Bid not found.");
 

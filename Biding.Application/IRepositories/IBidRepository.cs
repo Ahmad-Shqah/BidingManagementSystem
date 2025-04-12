@@ -5,7 +5,7 @@ namespace Biding.Application.IRepositories
     public interface IBidRepository :IRepository<Bid>
     {
         Task<Bid> CreateBidAsync(Bid bid);
-        Task<Bid?> GetBidForTenderWithIdAsync(int tenderId, int bidId);
+         Task<Bid?> GetBidWithIdAsync(int bidId);
         Task<IEnumerable<Bid>> GetAllBidsForTenderAsync(int tenderId);
         Task<Bid?> EvaluateBidAsync(int bidId, decimal score);
 

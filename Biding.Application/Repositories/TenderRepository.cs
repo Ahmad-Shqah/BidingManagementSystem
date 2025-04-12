@@ -1,5 +1,6 @@
 ﻿
 using Biding.Application.IRepositories;
+using Biding.Domain.BidDomain;
 using Biding.Domain.TenderDomain;
 using Biding_management_System.Data;
 using Biding_management_System.Models;
@@ -29,7 +30,8 @@ namespace Biding.Application.Repositories
         //get an exsiting tender
         public async Task<Tender> GetTenderByIdAsync(int id)
         {
-            return await _context.Tenders.Where(t => t.Id == id).FirstOrDefaultAsync();
+            return await _context.Tenders
+              .FirstOrDefaultAsync(t => t.Id == id );
         }
 
         //get all tenders available (u made as a User :) )

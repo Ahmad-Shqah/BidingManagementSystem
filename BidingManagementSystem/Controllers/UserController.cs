@@ -40,7 +40,7 @@ namespace Biding_management_System.Controllers
             // Convert the string Role to the UserRole enum --> all this logic just to achive RBAC :)
             if (!Enum.TryParse(userDTO.Role, true, out UserRole parsedRole))
             {
-                return BadRequest("Invalid role specified. Accepted Roles are :Admin,ProcurementOfficer,Bidder,Evaluator");
+                return BadRequest("Invalid role specified. Accepted Roles are :User,ProcurementOfficer,Bidder,Evaluator");
             }
 
             // Create the User 

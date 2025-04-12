@@ -23,10 +23,10 @@ namespace Biding.Application.Repositories
             return bid;
         }
 
-        public async Task<Bid?> GetBidForTenderWithIdAsync(int tenderId, int bidId)
+        public async Task<Bid?> GetBidWithIdAsync( int bidId)
         {
             return await _context.Bids
-                .FirstOrDefaultAsync(b => b.TenderId == tenderId && b.Id == bidId);
+                .FirstOrDefaultAsync( b => b.Id == bidId);
         }
 
         public async Task<IEnumerable<Bid>> GetAllBidsForTenderAsync(int tenderId)
@@ -44,6 +44,7 @@ namespace Biding.Application.Repositories
                 return null;
 
             bid.Score = score;
+            await _context.SaveChangesAsync();
             return bid;
         }
 

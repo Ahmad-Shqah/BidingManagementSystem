@@ -48,21 +48,14 @@ namespace BidingManagementSystem.Controllers
         }
 
         // Upload a document for a tender
-        [HttpPost("/api/Tender/uploadTenderDocument/{tenderId}")]
-        public async Task<IActionResult> UploadTenderDocument(TenderDocumentDTO tenderDocDto)
+        [HttpPost("/api/Tender/uploadTenderDocument")]
+        public async Task<IActionResult> UploadTenderDocument([FromBody] TenderDocumentDTO tenderDocDto)
         {
             var tender = await _tenderRepo.GetTenderByIdAsync(tenderDocDto.TenderId);
             if (tender == null)
             {
                 return NotFound("Tender not found.");
             }
-
-            var user = _userRepo.GetUserById(int.Parse(tender.IssuedBy));
-            if (user == null || (user.Role != UserRole.ProcurementOfficer))
-            {
-                return Unauthorized("You do not have permission to upload a document for this tender.");
-            }
-
 
             //  create TenderDocument
             var tenderDocument = new TenderDocument(tenderDocDto.TenderId, tenderDocDto.FileName, tenderDocDto.FilePath, DateTime.Now);
