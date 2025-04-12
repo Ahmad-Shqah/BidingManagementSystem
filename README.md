@@ -81,7 +81,4 @@ Repositories encapsulate all database operations.
 
 DTOs are used for clean data transfer and validation.
 
-No DbContext is injected into controllers — only repositories.
 
-📁 File Upload
-Uploaded files are saved to a specified folder (e.g., /uploads) and file metadata is stored in the database via the respective document entities (TenderDocument, BidDocument).
