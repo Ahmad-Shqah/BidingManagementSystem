@@ -1,4 +1,4 @@
-﻿
+﻿//not used: for future updates.
 namespace Biding_management_System.UnitOfWork
 {
     using Biding_management_System.Data;

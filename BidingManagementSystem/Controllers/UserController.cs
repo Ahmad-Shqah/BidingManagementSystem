@@ -84,7 +84,7 @@ namespace Biding_management_System.Controllers
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim(ClaimTypes.Name, user.FullName),
-                // Use the Role enum value (e.g., "Admin", "Bidder", etc.) note (its converted to string to ez save id database)
+                // Use the Role enum value (e.g., "Admin", "Bidder", etc.) note (its converted to string to ez save in database)
                 new Claim(ClaimTypes.Role, user.Role.ToString()),  
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };

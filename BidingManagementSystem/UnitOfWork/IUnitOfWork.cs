@@ -2,6 +2,7 @@
 
 using  Biding.Application.IRepositories;
 
+//not used: for future updates.
 
 public interface IUnitOfWork : IDisposable
 {
