@@ -30,7 +30,6 @@ namespace Biding.Infrastructure
                       .IsRequired();
 
                 entity.Property(b => b.Status)
-                      .HasMaxLength(50)
                       .IsRequired();
                 entity.Property(b => b.Score)
                      .HasColumnType("decimal(18,2)")

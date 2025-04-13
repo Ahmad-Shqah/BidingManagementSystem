@@ -16,12 +16,33 @@ namespace Biding.Application.Repositories
             _context = context;
         }
 
+        // Big code to auto score bids
         public async Task<Bid> CreateBidAsync(Bid bid)
         {
+            // Add the new bid
             _context.Bids.Add(bid);
             await _context.SaveChangesAsync();
+
+            // Get all bids for the same TenderId
+            var allBids = await _context.Bids
+                .Where(b => b.TenderId == bid.TenderId)
+                .ToListAsync();
+
+            // Find the lowest ProposedAmount
+            decimal minAmount = allBids.Min(b => b.ProposedAmount);
+
+            // Rescore all bids
+            foreach (var b in allBids)
+            {
+                b.Score = (minAmount / b.ProposedAmount) * 100;
+            }
+
+            // Save the updated scores
+            await _context.SaveChangesAsync();
+
             return bid;
         }
+
 
         public async Task<Bid?> GetBidWithIdAsync( int bidId)
         {
@@ -37,13 +58,23 @@ namespace Biding.Application.Repositories
                 .ToListAsync();
         }
 
-        public async Task<Bid?> EvaluateBidAsync(int bidId,decimal score)
+        //evaluate bid (to choose thhe winning bid)
+        public async Task<Bid?> EvaluateBidAsync(int bidId, Status status)
         {
             var bid = await _context.Bids.FindAsync(bidId);
             if (bid == null)
                 return null;
 
-            bid.Score = score;
+            bid.Status = status;
+            // Get all bids for the same TenderId
+            var allBids = await _context.Bids
+                .Where(b => b.TenderId == bid.TenderId)
+                .ToListAsync();
+            foreach (var b in allBids)
+            {//When a bid is set to be accepted for that tender, the other bids must be set refused
+                if (b.Status != Status.Accepted)
+                    b.Status = Status.Refused;
+            }
             await _context.SaveChangesAsync();
             return bid;
         }

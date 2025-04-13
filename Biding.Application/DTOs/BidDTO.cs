@@ -1,4 +1,6 @@
 ﻿
+using Biding.Domain.BidDomain;
+
 namespace Biding.Application.DTOs
 {
     public class BidDTO
@@ -9,6 +11,5 @@ namespace Biding.Application.DTOs
         public string? TechnicalProposal { get; set; }
         public string? FinancialProposal { get; set; }
         public DateTime SubmittedAt { get; set; }
-        public string Status { get; set; }
     }
 }

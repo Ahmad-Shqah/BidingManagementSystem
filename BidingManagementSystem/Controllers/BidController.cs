@@ -38,8 +38,7 @@ namespace BidingManagementSystem.Controllers
                 bidDto.ProposedAmount,
                 bidDto.TechnicalProposal,
                 bidDto.FinancialProposal,
-                bidDto.SubmittedAt,
-                bidDto.Status
+                bidDto.SubmittedAt
             );
 
             var createdBid = await _bidRepo.CreateBidAsync(bid);
@@ -64,13 +63,14 @@ namespace BidingManagementSystem.Controllers
             return Ok(bids);
         }
 
-        // Evaluate Bid
-        [HttpPut("evaluate/{bidId}")]
-        public async Task<IActionResult> EvaluateBid(int bidId, decimal score)
+        // Evaluate Bid: status values are : 0 for accepted,1 for refuesd, 2 for bending.
+        [HttpPut("evaluate")]
+        public async Task<IActionResult> EvaluateBid([FromBody] EvaluateDTO evaluateDto)
         {
-            var bid = await _bidRepo.EvaluateBidAsync(bidId, score);
+            var bid = await _bidRepo.EvaluateBidAsync(evaluateDto.BidId, evaluateDto.status);
             if (bid == null)
                 return NotFound("Bid not found.");
+
             return Ok(bid);
         }
 

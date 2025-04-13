@@ -40,5 +40,15 @@ public class SystemDbContext : DbContext
       )
       .HasMaxLength(50) 
       .IsRequired();
+
+        //just for the Status in Bid to achive logical scoring system.
+        modelBuilder.Entity<Bid>()
+      .Property(b => b.Status)
+      .HasConversion(
+          v => v.ToString(),
+          v => (Status)Enum.Parse(typeof(Status), v)
+      )
+      .HasMaxLength(50)
+      .IsRequired();
     }
 }

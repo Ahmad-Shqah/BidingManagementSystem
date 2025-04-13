@@ -1,4 +1,4 @@
-﻿
+﻿//Note : this table isnt used , its for future updates of evaluation system :) for now a datafield in bid table is good.
 namespace Biding_management_System.Models
 {
     public class Evaluation

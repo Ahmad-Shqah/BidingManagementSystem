@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Biding.Infrastructure.Migrations
 {
     [DbContext(typeof(SystemDbContext))]
-    [Migration("20250411202932_FirstMG")]
+    [Migration("20250413150302_FirstMG")]
     partial class FirstMG
     {
         /// <inheritdoc />
