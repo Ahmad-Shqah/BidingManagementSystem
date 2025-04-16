@@ -6,7 +6,6 @@ namespace Biding.Application.DTOs
         public string Title { get; set; }
         public string ReferenceNumber { get; set; }
         public string? Description { get; set; }
-        public string IssuedBy { get; set; }
         public DateTime IssueDate { get; set; }
         public DateTime ClosingDate { get; set; }
         public string Type { get; set; }
